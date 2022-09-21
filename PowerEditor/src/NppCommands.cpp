@@ -1483,6 +1483,16 @@ void Notepad_plus::command(int id)
 		}
 		break;
 
+		case IDM_TOGGLE_FOUND_RESULTS:
+		{
+			if (_findReplaceDlg.isFinderVisible())
+				_findReplaceDlg.hideFinder();
+			else
+				_findReplaceDlg.focusOnFinder();
+		}
+		break;
+
+
 		case IDM_FOCUS_ON_FOUND_RESULTS:
 		{
 			if (GetFocus() == _findReplaceDlg.getHFindResults())

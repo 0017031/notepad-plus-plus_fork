@@ -367,6 +367,17 @@ public :
 		return false;
 	};
 
+	void hideFinder() {
+		if (isFinderVisible())  		// Hide finder
+		{
+			::SendMessage(_hParent, NPPM_DMMHIDE, 0, (LPARAM)_pFinder->getHSelf());
+		}
+	}
+
+	bool isFinderVisible() {
+		return _pFinder && _pFinder->isCreated() && _pFinder->isVisible();
+	}
+
 	HWND getHFindResults() {
 		if (_pFinder)
 			return _pFinder->_scintView.getHSelf();
