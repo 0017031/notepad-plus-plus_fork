@@ -2832,7 +2832,7 @@ LRESULT CALLBACK GridProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 					CLIP_DEFAULT_PRECIS,
 					0,
 					0,
-					L"MS Shell Dlg");
+					L"Segoe UI");
 				g_hfontheader = CreateFont(18, 0, 0, 0, FW_HEAVY, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, 0, 0, L"MS Shell Dlg");
 				g_hfonttitle = CreateFont(20, 0, 0, 0, FW_HEAVY, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, 0, 0, L"MS Shell Dlg");
 			}
@@ -2840,7 +2840,6 @@ LRESULT CALLBACK GridProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			if ((BG_GridIndex >= 0) && (BG_GridIndex < MAX_GRIDS))//if you aren't over the MAX_GRIDS limit, add a grid
 			{
-
 				BGHS[BG_GridIndex].gridmenu = GetMenu(hWnd);
 
 				BGHS[BG_GridIndex].hlist1 = CreateWindowEx(WS_EX_CLIENTEDGE, L"LISTBOX", L"",
@@ -2851,8 +2850,6 @@ LRESULT CALLBACK GridProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				BGHS[BG_GridIndex].hcolumnheadingfont = g_hfontheader;
 				wcscpy_s(BGHS[BG_GridIndex].title, lpcs->lpszName);
 				SendMessage(hWnd, WM_SETTEXT, 0, reinterpret_cast<LPARAM>(lpcs->lpszName));
-
-
 			}
 			if (BG_GridIndex == -1)
 			{

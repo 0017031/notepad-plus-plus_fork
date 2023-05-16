@@ -702,7 +702,7 @@ LRESULT ScintillaEditView::scintillaNew_Proc(HWND hwnd, UINT Message, WPARAM wPa
 	return _callWindowProc(_scintillaDefaultProc, hwnd, Message, wParam, lParam);
 }
 
-#define DEFAULT_FONT_NAME "Courier New"
+#define DEFAULT_FONT_NAME "Consolas"
 
 void ScintillaEditView::setSpecialStyle(const Style & styleToSet)
 {

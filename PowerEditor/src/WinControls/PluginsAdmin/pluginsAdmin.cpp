@@ -1197,7 +1197,7 @@ intptr_t CALLBACK PluginsAdminDlg::run_dlgProc(UINT message, WPARAM wParam, LPAR
 			return TRUE;
 		}
 
-		case WM_COMMAND:
+		case WM_COMMAND :
 		{
 			if (HIWORD(wParam) == EN_CHANGE)
 			{
@@ -1331,7 +1331,7 @@ intptr_t CALLBACK PluginsAdminDlg::run_dlgProc(UINT message, WPARAM wParam, LPAR
 			return TRUE;
 		}
 
-		case WM_DESTROY:
+		case WM_DESTROY :
 		{
 			_repoLink.destroy();
 			return TRUE;

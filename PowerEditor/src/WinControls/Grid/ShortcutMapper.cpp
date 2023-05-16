@@ -38,9 +38,9 @@ void ShortcutMapper::initTabs()
 	TabCtrl_SetCurSel(_hTabCtrl, static_cast<int>(_currentState));
 }
 
-void ShortcutMapper::getClientRect(RECT& rc) const
+void ShortcutMapper::getClientRect(RECT & rc) const 
 {
-	Window::getClientRect(rc);
+		Window::getClientRect(rc);
 
 	RECT rcTab{};
 	getMappedChildRect(IDC_BABYGRID_TABBAR, rcTab);
@@ -584,15 +584,15 @@ void ShortcutMapper::resizeDialogElements()
 
 intptr_t CALLBACK ShortcutMapper::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch (message)
+	switch (message) 
 	{
-		case WM_INITDIALOG:
+		case WM_INITDIALOG :
 		{
 			setDpi();
 			initBabyGrid();
 			initTabs();
 			fillOutBabyGrid();
-			_babygrid.display();
+			_babygrid.display();	
 			goToCenter();
 
 			resizeDialogElements();
@@ -639,7 +639,7 @@ intptr_t CALLBACK ShortcutMapper::run_dlgProc(UINT message, WPARAM wParam, LPARA
 			return TRUE;
 		}
 
-		case WM_GETMINMAXINFO:
+		case WM_GETMINMAXINFO :
 		{
 			auto mmi = reinterpret_cast<MINMAXINFO*>(lParam);
 			if (_dialogInitDone)
@@ -1201,7 +1201,7 @@ intptr_t CALLBACK ShortcutMapper::run_dlgProc(UINT message, WPARAM wParam, LPARA
 							break;
 						}
 
-						// updateShortcuts() will update all menu item - the menu items will be shifted
+                        // updateShortcuts() will update all menu item - the menu items will be shifted
 						nppParam.getAccelerator()->updateShortcuts();
 						nppParam.setShortcutDirty();
 					}

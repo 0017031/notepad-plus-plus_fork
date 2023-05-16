@@ -273,7 +273,7 @@ void DockingCont::destroyFonts()
 //
 LRESULT DockingCont::runProcCaption(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
-	static ToolTip toolTip;
+	static ToolTip	toolTip;
 
 	switch (Message)
 	{
@@ -586,7 +586,7 @@ void DockingCont::drawCaptionItem(DRAWITEMSTRUCT *pDrawItemStruct)
 				ANSI_CHARSET, OUT_DEFAULT_PRECIS,
 				CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
 				DEFAULT_PITCH | FF_ROMAN,
-				L"MS Shell Dlg");
+				L"Segoe UI");
 		}
 
 		hOldFont = (HFONT)::SelectObject(hDc, hFont);
@@ -1305,7 +1305,7 @@ intptr_t CALLBACK DockingCont::run_dlgProc(UINT Message, WPARAM wParam, LPARAM l
 			return TRUE;
 		}
 
-		case WM_COMMAND:
+		case WM_COMMAND : 
 		{
 			switch (LOWORD(wParam))
 			{   
@@ -1780,7 +1780,7 @@ bool DockingCont::updateCaption()
 void DockingCont::focusClient()
 {
 	TCITEM tcItem {};
-	int iItem = getActiveTb();
+	int iItem = getActiveTb();	
 
 	if (iItem != -1)
 	{
