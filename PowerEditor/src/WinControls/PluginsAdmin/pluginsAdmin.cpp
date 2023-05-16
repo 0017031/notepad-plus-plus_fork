@@ -496,7 +496,7 @@ bool PluginsAdminDlg::removePlugins(int iTab)
 		case 3: // Incompatible{
 		{
 			pList = &_incompatibleList;
-		}
+}
 		break;
 
 		case 4: // Deactivated
@@ -1484,7 +1484,7 @@ intptr_t CALLBACK PluginsAdminDlg::run_dlgProc(UINT message, WPARAM wParam, LPAR
 				ListView_SetColumnWidth(list.getViewHwnd(), 0, szColName);
 				ListView_SetColumnWidth(list.getViewHwnd(), 1, szColVer);
 				::SendMessage(list.getViewHwnd(), WM_SETFONT, reinterpret_cast<WPARAM>(hFont), MAKELPARAM(TRUE, 0));
-			};
+				};
 			
 			setListViewSize(_availableList);
 			setListViewSize(_updateList);
@@ -1630,8 +1630,8 @@ intptr_t CALLBACK PluginsAdminDlg::run_dlgProc(UINT message, WPARAM wParam, LPAR
 						if ((pnmv->uNewState & LVIS_STATEIMAGEMASK) == INDEXTOSTATEIMAGEMASK(2) || // checked
 							(pnmv->uNewState & LVIS_STATEIMAGEMASK) == INDEXTOSTATEIMAGEMASK(1))   // unchecked
 						{
-							vector<size_t> checkedArray = pViewList->getCheckedIndexes();
-							bool showButton = checkedArray.size() > 0;
+								vector<size_t> checkedArray = pViewList->getCheckedIndexes();
+								bool showButton = checkedArray.size() > 0;
 
 							if (leftButtonID)
 							{

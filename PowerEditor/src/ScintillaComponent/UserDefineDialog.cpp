@@ -125,7 +125,7 @@ intptr_t CALLBACK SharedParametersDialog::run_dlgProc(UINT Message, WPARAM wPara
 {
     switch (Message)
     {
-        case WM_INITDIALOG:
+        case WM_INITDIALOG :
         {
             // initControls();
 
@@ -176,7 +176,7 @@ intptr_t CALLBACK FolderStyleDialog::run_dlgProc(UINT Message, WPARAM wParam, LP
 {
     switch (Message)
     {
-        case WM_INITDIALOG:
+        case WM_INITDIALOG :
         {
             _pageLink.init(_hInst, _hSelf);
             _pageLink.create(::GetDlgItem(_hSelf, IDC_WEB_HELP_LINK), L"https://npp-user-manual.org/docs/user-defined-language-system/");
@@ -294,7 +294,7 @@ intptr_t CALLBACK KeyWordsStyleDialog::run_dlgProc(UINT Message, WPARAM wParam, 
 {
     switch (Message)
     {
-        case WM_INITDIALOG:
+        case WM_INITDIALOG :
         {
 			// extend Keyword edit boxes to hold 128k of wchar_t
 			static constexpr auto textLimit = static_cast<WPARAM>(128 * 1024);
@@ -310,7 +310,7 @@ intptr_t CALLBACK KeyWordsStyleDialog::run_dlgProc(UINT Message, WPARAM wParam, 
             return SharedParametersDialog::run_dlgProc(Message, wParam, lParam);
         }
 
-        case WM_COMMAND:
+        case WM_COMMAND :
         {
             switch (wParam)
             {
@@ -1176,7 +1176,7 @@ intptr_t CALLBACK UserDefineDialog::run_dlgProc(UINT message, WPARAM wParam, LPA
             return TRUE;
         }
 
-        case WM_COMMAND:
+        case WM_COMMAND :
         {
             if (HIWORD(wParam) == EN_CHANGE)
             {
@@ -1188,14 +1188,14 @@ intptr_t CALLBACK UserDefineDialog::run_dlgProc(UINT message, WPARAM wParam, LPA
             else if (HIWORD(wParam) == CBN_SELCHANGE) // HIWORD(wParam) for accelerators is also 1
             {
                 switch (LOWORD(wParam))
-                {
+            {
                     case IDC_LANGNAME_COMBO:
-                    {
-                        auto i = ::SendDlgItemMessage(_hSelf, LOWORD(wParam), CB_GETCURSEL, 0, 0);
-                        enableLangAndControlsBy(i);
-                        updateDlg();
+                {
+					auto i = ::SendDlgItemMessage(_hSelf, LOWORD(wParam), CB_GETCURSEL, 0, 0);
+                    enableLangAndControlsBy(i);
+                    updateDlg();
                         return TRUE;
-                    }
+                }
 
                     case IDC_NEXT_TAB:
                     case IDC_PREV_TAB:
@@ -1205,8 +1205,8 @@ intptr_t CALLBACK UserDefineDialog::run_dlgProc(UINT message, WPARAM wParam, LPA
                         _ctrlTab.clickedUpdate();
                         ::SetFocus(_ctrlTab.getHSelf());
 
-                        return TRUE;
-                    }
+                return TRUE;
+            }
 
                     default:
                         return FALSE;
@@ -1621,7 +1621,7 @@ intptr_t CALLBACK StringDlg::run_dlgProc(UINT Message, WPARAM wParam, LPARAM lPa
 {
     switch (Message)
     {
-        case WM_INITDIALOG:
+        case WM_INITDIALOG :
         {
 			NppDarkMode::autoSubclassAndThemeChildControls(_hSelf);
 
@@ -1688,7 +1688,7 @@ intptr_t CALLBACK StringDlg::run_dlgProc(UINT Message, WPARAM wParam, LPARAM lPa
             return TRUE;
         }
 
-        case WM_COMMAND:
+        case WM_COMMAND :
         {
             switch (wParam)
             {
@@ -1957,7 +1957,7 @@ intptr_t CALLBACK StylerDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lPa
             return TRUE;
         }
 
-        case WM_COMMAND:
+        case WM_COMMAND :
         {
 			if (dlg == nullptr)
 				return FALSE;

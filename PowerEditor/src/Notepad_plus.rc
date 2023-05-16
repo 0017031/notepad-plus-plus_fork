@@ -450,7 +450,6 @@ BEGIN
         BEGIN
             MENUITEM "Explorer",       IDM_FILE_OPEN_FOLDER
             MENUITEM "cmd",            IDM_FILE_OPEN_CMD
-            MENUITEM "PowerShell",     IDM_FILE_OPEN_POWERSHELL
             MENUITEM SEPARATOR
             MENUITEM "Folder as Workspace", IDM_FILE_CONTAININGFOLDERASWORKSPACE
         END
@@ -560,7 +559,6 @@ BEGIN
             MENUITEM "Sort Lines As Integers Ascending",                 IDM_EDIT_SORTLINES_INTEGER_ASCENDING
             MENUITEM "Sort Lines As Decimals (Comma) Ascending",         IDM_EDIT_SORTLINES_DECIMALCOMMA_ASCENDING
             MENUITEM "Sort Lines As Decimals (Dot) Ascending",           IDM_EDIT_SORTLINES_DECIMALDOT_ASCENDING
-            MENUITEM "Sort Lines By Length Ascending",                   IDM_EDIT_SORTLINES_LENGTH_ASCENDING
             MENUITEM SEPARATOR
             MENUITEM "Sort Lines Lexicographically Descending",          IDM_EDIT_SORTLINES_LEXICOGRAPHIC_DESCENDING
             MENUITEM "Sort Lines Lex. Descending Ignoring Case",         IDM_EDIT_SORTLINES_LEXICO_CASE_INSENS_DESCENDING
@@ -568,7 +566,6 @@ BEGIN
             MENUITEM "Sort Lines As Integers Descending",                IDM_EDIT_SORTLINES_INTEGER_DESCENDING
             MENUITEM "Sort Lines As Decimals (Comma) Descending",        IDM_EDIT_SORTLINES_DECIMALCOMMA_DESCENDING
             MENUITEM "Sort Lines As Decimals (Dot) Descending",          IDM_EDIT_SORTLINES_DECIMALDOT_DESCENDING
-            MENUITEM "Sort Lines By Length Descending",                  IDM_EDIT_SORTLINES_LENGTH_DESCENDING
         END
         POPUP "Co&mment/Uncomment"
         BEGIN
@@ -617,12 +614,10 @@ BEGIN
         END
         POPUP "&On Selection"
         BEGIN
-            MENUITEM "Open File", IDM_EDIT_OPENSELECTEDFILETOEDIT
-            MENUITEM "Open Containing Folder in Explorer", IDM_EDIT_OPENSELECTEDFILEFOLDERINEXPLORER
+            MENUITEM "Open File",           IDM_EDIT_OPENASFILE
+            MENUITEM "Open Containing Folder in Explorer",         IDM_EDIT_OPENINFOLDER
             MENUITEM SEPARATOR
-            MENUITEM "&Redact Selection █ (Shift: ●)", IDM_EDIT_REDACT_SELECTION
-            MENUITEM SEPARATOR
-            MENUITEM "Search on Internet", IDM_EDIT_SEARCHONINTERNET
+            MENUITEM "Search on Internet",      IDM_EDIT_SEARCHONINTERNET
             MENUITEM "Change Search Engine...", IDM_EDIT_CHANGESEARCHENGINE
         END
         MENUITEM SEPARATOR
@@ -648,7 +643,7 @@ BEGIN
         MENUITEM "Character &Panel",         IDM_EDIT_CHAR_PANEL
         MENUITEM "Clipboard &History",       IDM_EDIT_CLIPBOARDHISTORY_PANEL
         MENUITEM SEPARATOR
-        POPUP "Read-&Only in Notepad++"
+        POPUP "Read-Only in Notepad++"
         BEGIN
             MENUITEM "Read-Only on Current Document",     IDM_EDIT_TOGGLEREADONLY
             MENUITEM "Read-Only for All Documents",       IDM_EDIT_SETREADONLYFORALLDOCS
@@ -749,7 +744,7 @@ BEGIN
             MENUITEM "Paste to (Replace) Bookmarked Lines",    IDM_SEARCH_PASTEMARKEDLINES
             MENUITEM "Remove Bookmarked Lines",                IDM_SEARCH_DELETEMARKEDLINES
             MENUITEM "Remove Non-Bookmarked Lines",            IDM_SEARCH_DELETEUNMARKEDLINES
-            MENUITEM "Inverse Bookmarks",                      IDM_SEARCH_INVERSEMARKS
+            MENUITEM "Inverse Bookmark",                       IDM_SEARCH_INVERSEMARKS
         END
         MENUITEM SEPARATOR
         MENUITEM "Find characters in rang&e...",       IDM_SEARCH_FINDCHARINRANGE
@@ -757,24 +752,22 @@ BEGIN
 
     POPUP "&View"
     BEGIN
+	    MENUITEM "AS&CII Map",                 IDM_EDIT_CHAR_PANEL
         MENUITEM "Always on Top",              IDM_VIEW_ALWAYSONTOP
         MENUITEM "Toggle Full Screen Mode",    IDM_VIEW_FULLSCREENTOGGLE
         MENUITEM "Post-It",                    IDM_VIEW_POSTIT
         MENUITEM "Distraction Free Mode",      IDM_VIEW_DISTRACTIONFREE
 
-	    MENUITEM "AS&CII Map",                 IDM_EDIT_CHAR_PANEL
-
-
         MENUITEM SEPARATOR
-        POPUP "&View Current File in"
+        POPUP "View Current File in"
         BEGIN
-            MENUITEM "&Firefox", 				IDM_VIEW_IN_FIREFOX
-            MENUITEM "&Chrome", 				IDM_VIEW_IN_CHROME
-            MENUITEM "&Edge", 					IDM_VIEW_IN_EDGE
-            MENUITEM "&IE", 					IDM_VIEW_IN_IE
+            MENUITEM "Firefox", IDM_VIEW_IN_FIREFOX
+            MENUITEM "Chrome", IDM_VIEW_IN_CHROME
+            MENUITEM "Edge", IDM_VIEW_IN_EDGE
+            MENUITEM "IE", IDM_VIEW_IN_IE
         END
         MENUITEM SEPARATOR
-        POPUP "Show S&ymbol"
+        POPUP "Show Symbol"
         BEGIN
             MENUITEM "Show Space and Tab",                     IDM_VIEW_TAB_SPACE
             MENUITEM "Show End of Line",                       IDM_VIEW_EOL
@@ -785,23 +778,21 @@ BEGIN
             MENUITEM "Show Indent Guide",                      IDM_VIEW_INDENT_GUIDE
             MENUITEM "Show Wrap Symbol",                       IDM_VIEW_WRAP_SYMBOL
         END
-        POPUP "&Zoom"
+        POPUP "Zoom"
         BEGIN
             MENUITEM "Zoom &In (Ctrl+Mouse Wheel Up)",       IDM_VIEW_ZOOMIN
             MENUITEM "Zoom &Out (Ctrl+Mouse Wheel Down)",    IDM_VIEW_ZOOMOUT
-            MENUITEM "&Restore Default Zoom",                IDM_VIEW_ZOOMRESTORE
-            MENUITEM SEPARATOR
-            MENUITEM "&Synchronize Across Views",            IDM_VIEW_ZOOM_SYNC
+            MENUITEM "Restore Default Zoom",                 IDM_VIEW_ZOOMRESTORE
         END
-        POPUP "&Move/Clone Current Document"
+        POPUP "Move/Clone Current Document"
         BEGIN
-            MENUITEM "&Move to Other View",      IDM_VIEW_GOTO_ANOTHER_VIEW
-            MENUITEM "&Clone to Other View",     IDM_VIEW_CLONE_TO_ANOTHER_VIEW
-            MENUITEM "Mo&ve to New Instance",    IDM_VIEW_GOTO_NEW_INSTANCE
-            MENUITEM "&Open in New Instance",    IDM_VIEW_LOAD_IN_NEW_INSTANCE
+            MENUITEM "Move to Other View",      IDM_VIEW_GOTO_ANOTHER_VIEW
+            MENUITEM "Clone to Other View",     IDM_VIEW_CLONE_TO_ANOTHER_VIEW
+            MENUITEM "Move to New Instance",    IDM_VIEW_GOTO_NEW_INSTANCE
+            MENUITEM "Open in New Instance",    IDM_VIEW_LOAD_IN_NEW_INSTANCE
         END
 
-        POPUP "Ta&b"
+        POPUP "Tab"
         BEGIN
             MENUITEM "1st Tab",                 IDM_VIEW_TAB1
             MENUITEM "2nd Tab",                 IDM_VIEW_TAB2
@@ -830,9 +821,9 @@ BEGIN
             MENUITEM "Apply Color 5",           IDM_VIEW_TAB_COLOUR_5
             MENUITEM "Remove Color",            IDM_VIEW_TAB_COLOUR_NONE
         END
-        MENUITEM "&Word wrap",                  IDM_VIEW_WRAP
-        MENUITEM "Focus on &Another View",      IDM_VIEW_SWITCHTO_OTHER_VIEW
-        MENUITEM "&Hide Lines",                 IDM_VIEW_HIDELINES
+        MENUITEM "Word wrap",                   IDM_VIEW_WRAP
+        MENUITEM "Focus on Another View",         IDM_VIEW_SWITCHTO_OTHER_VIEW
+        MENUITEM "Hide Lines",                  IDM_VIEW_HIDELINES
         MENUITEM SEPARATOR
         MENUITEM "Fold All",                    IDM_VIEW_FOLDALL
         MENUITEM "Unfold All",                  IDM_VIEW_UNFOLDALL
@@ -862,26 +853,26 @@ BEGIN
         END
 
         MENUITEM SEPARATOR
-            MENUITEM "&Summary...",  IDM_VIEW_SUMMARY
+            MENUITEM "Summary...",  IDM_VIEW_SUMMARY
         MENUITEM SEPARATOR
-            POPUP "Pro&ject Panels"
+            POPUP "Project Panels"
             BEGIN
-                MENUITEM "Project Panel &1",          IDM_VIEW_PROJECT_PANEL_1
-                MENUITEM "Project Panel &2",          IDM_VIEW_PROJECT_PANEL_2
-                MENUITEM "Project Panel &3",          IDM_VIEW_PROJECT_PANEL_3
+                MENUITEM "Project Panel 1",          IDM_VIEW_PROJECT_PANEL_1
+                MENUITEM "Project Panel 2",          IDM_VIEW_PROJECT_PANEL_2
+                MENUITEM "Project Panel 3",          IDM_VIEW_PROJECT_PANEL_3
             END
-        MENUITEM "Folder as Wor&kspace",   	IDM_VIEW_FILEBROWSER
-        MENUITEM "&Document Map",          	IDM_VIEW_DOC_MAP
-        MENUITEM "D&ocument List",         	IDM_VIEW_DOCLIST
-        MENUITEM "Function &List",         	IDM_VIEW_FUNC_LIST
+        MENUITEM "Folder as Workspace",   IDM_VIEW_FILEBROWSER
+        MENUITEM "Document Map",          IDM_VIEW_DOC_MAP
+        MENUITEM "Document List",         IDM_VIEW_DOCLIST
+        MENUITEM "Function List",         IDM_VIEW_FUNC_LIST
         MENUITEM SEPARATOR
-        MENUITEM "Sy&nchronize Vertical Scrolling",      IDM_VIEW_SYNSCROLLV
-        MENUITEM "Syn&chronize Horizontal Scrolling",    IDM_VIEW_SYNSCROLLH
+        MENUITEM "Synchronize Vertical Scrolling",      IDM_VIEW_SYNSCROLLV
+        MENUITEM "Synchronize Horizontal Scrolling",    IDM_VIEW_SYNSCROLLH
         MENUITEM SEPARATOR
-        MENUITEM "T&ext Direction RTL",                  IDM_EDIT_RTL
-        MENUITEM "Te&xt Direction LTR",                  IDM_EDIT_LTR
+        MENUITEM "Text Direction RTL",                  IDM_EDIT_RTL
+        MENUITEM "Text Direction LTR",                  IDM_EDIT_LTR
         MENUITEM SEPARATOR
-        MENUITEM "Monito&ring (tail -f)",  	IDM_VIEW_MONITORING
+        MENUITEM "Monitoring (tail -f)",    IDM_VIEW_MONITORING
     END
 
     POPUP "E&ncoding"
@@ -909,7 +900,7 @@ BEGIN
             END
             POPUP "Celtic"
             BEGIN
-                MENUITEM "ISO 8859-14",         IDM_FORMAT_ISO_8859_14
+                MENUITEM "ISO 8859-14",               IDM_FORMAT_ISO_8859_14
             END
             POPUP "Cyrillic"
             BEGIN
@@ -931,7 +922,7 @@ BEGIN
             POPUP "Chinese"
             BEGIN
                 MENUITEM "Big5 (Traditional)",  IDM_FORMAT_BIG5
-                MENUITEM "GB2312 (Simplified)", IDM_FORMAT_GB2312
+                MENUITEM "GB2312 (Simplified)",     IDM_FORMAT_GB2312
             END
 
             POPUP "Eastern European"
@@ -993,7 +984,7 @@ BEGIN
                 MENUITEM "OEM 858",             IDM_FORMAT_DOS_858
                 MENUITEM "OEM 860 : Portuguese",  IDM_FORMAT_DOS_860
                 MENUITEM "OEM 863 : French",      IDM_FORMAT_DOS_863
-                MENUITEM "OEM-US : CP437",      IDM_FORMAT_DOS_437
+                MENUITEM "OEM-US",              IDM_FORMAT_DOS_437
                 MENUITEM "Windows-1252",        IDM_FORMAT_WIN_1252
             END
 
@@ -1037,7 +1028,6 @@ BEGIN
         MENUITEM "Diff",                    IDM_LANG_DIFF
         MENUITEM "Erlang",                  IDM_LANG_ERLANG
         MENUITEM "ErrorList",               IDM_LANG_ERRORLIST
-        MENUITEM "Escape Sequence (ANSI)",  IDM_LANG_ESCSEQ
         MENUITEM "ESCRIPT",                 IDM_LANG_ESCRIPT
         MENUITEM "Forth",                   IDM_LANG_FORTH
         MENUITEM "Fortran (free form)",     IDM_LANG_FORTRAN
@@ -1091,7 +1081,6 @@ BEGIN
         MENUITEM "Smalltalk",               IDM_LANG_SMALLTALK
         MENUITEM "Spice",                   IDM_LANG_SPICE
         MENUITEM "SQL",                     IDM_LANG_SQL
-        MENUITEM "Structured Text",         IDM_LANG_STTXT
         MENUITEM "Swift",                  IDM_LANG_SWIFT
         MENUITEM "S-Record",                IDM_LANG_SREC
         MENUITEM "TCL",                     IDM_LANG_TCL
@@ -1152,10 +1141,9 @@ BEGIN
     END
     POPUP "E"
     BEGIN
-        MENUITEM "Erlang",                    IDM_LANG_ERLANG
-        MENUITEM "ErrorList",                 IDM_LANG_ERRORLIST
-        MENUITEM "Escape Sequence (ANSI)",    IDM_LANG_ESCSEQ
-        MENUITEM "ESCRIPT",                   IDM_LANG_ESCRIPT
+        MENUITEM "Erlang",                IDM_LANG_ERLANG
+        MENUITEM "ErrorList",             IDM_LANG_ERRORLIST
+        MENUITEM "ESCRIPT",               IDM_LANG_ESCRIPT
     END
     POPUP "F"
     BEGIN
@@ -1245,7 +1233,6 @@ BEGIN
         MENUITEM "Smalltalk",             IDM_LANG_SMALLTALK
         MENUITEM "Spice",                 IDM_LANG_SPICE
         MENUITEM "SQL",                   IDM_LANG_SQL
-        MENUITEM "Structured Text",       IDM_LANG_STTXT
         MENUITEM "Swift",                IDM_LANG_SWIFT
         MENUITEM "S-Record",              IDM_LANG_SREC
     END
@@ -1332,8 +1319,6 @@ BEGIN
     POPUP "&Run"
     BEGIN
         MENUITEM "&Run...",    IDM_EXECUTE
-		MENUITEM SEPARATOR
-		MENUITEM "Validate shortcuts.xml",    IDM_EXECUTE_VALIDATE_SHORTCUTSXML
     END
 
     POPUP "&Plugins"
@@ -1402,30 +1387,13 @@ END
 
 IDD_ABOUTBOX DIALOGEX 0, 0, 270, 240
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_BORDER | WS_SYSMENU
-FONT 8, L"MS Shell Dlg", 0, 0, 0x1
+FONT 10, L"Segoe UI", 0, 0, 0x1
 BEGIN
     EDITTEXT        IDC_BUILD_DATETIME,150,2,150,10, ES_READONLY | NOT WS_BORDER
     CONTROL         "", IDI_NPPABOUT_LOGO,"Static",SS_OWNERDRAW,10,5,128,128
     LTEXT           NOTEPAD_PLUS_VERSION, IDC_STATIC,85,25,140,11
     LTEXT           "bit",IDC_VERSION_BIT,160,25,140,11
     //LTEXT           "Author :",IDC_STATIC,21,45,31,8
-    //LTEXT           "FREE UYGHUR",IDC_AUTHOR_NAME,70,32,70,8
-    //LTEXT           "Stand with Hong Kong",IDC_AUTHOR_NAME,70,32,80,8
-    //LTEXT           "pour Samuel Paty",IDC_AUTHOR_NAME,70,32,80,8
-    //LTEXT           "Boycott Beijing 2022",IDC_AUTHOR_NAME,85,38,80,8
-    //LTEXT           "Declare variables, not war",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "Make Apps, not war",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "Stand Up For Ukraine",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "Unhappy Users' Edition",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "Happy Users' Edition",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "I want to get a refund",IDC_HOME_ADDR,85,48,126,8
-    //LTEXT           "20th-Year Anniversary",IDC_AUTHOR_NAME,85,38,100,8
-    //LTEXT           "The short story",IDC_HOME_ADDR,85,48,126,10
-	//LTEXT           "Support Taiwan's Sovereignty", IDC_AUTHOR_NAME, 85, 38, 120, 10
-	//LTEXT           "支持台灣獨立", IDC_AUTHOR_NAME, 85, 38, 120, 10
-	//LTEXT           "Support Taiwan's return to the UN", IDC_AUTHOR_NAME, 85, 38, 130, 10
-	//LTEXT           "We are with Ukraine", IDC_AUTHOR_NAME, 85, 38, 130, 10
-	//LTEXT           "Tiananmen Massacre Commemoration", IDC_AUTHOR_NAME, 85, 38, 150, 10
     //LTEXT           "Slava Ukraini", IDC_AUTHOR_NAME, 85, 38, 150, 10
     LTEXT            "Home:",IDC_STATIC,21,58,47,8
     LTEXT            "https://notepad-plus-plus.org/",IDC_HOME_ADDR,50,57,126,10
@@ -1439,7 +1407,7 @@ IDD_DEBUGINFOBOX DIALOGEX 0, 0, 300, 195
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE
 CAPTION "Debug Info"
-FONT 8, L"MS Shell Dlg", 0, 0, 0x1
+FONT 10, L"Segoe UI", 0, 0, 0x1
 BEGIN
     GROUPBOX        "",IDC_STATIC,8,3,284,151,BS_CENTER
     EDITTEXT        IDC_DEBUGINFO_EDIT,18,16,264,128,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL
@@ -1447,14 +1415,14 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,125,175,50,14
 END
 
-IDD_COMMANDLINEARGSBOX DIALOGEX 0, 0, 520, 398
+IDD_COMMANDLINEARGSBOX DIALOGEX 0, 0, 420, 385
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE
 CAPTION "Command Line Arguments"
 FONT 8, L"MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    EDITTEXT        IDC_COMMANDLINEARGS_EDIT,10,10,505,350,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL
-    DEFPUSHBUTTON   "OK",IDOK,238,373,45,14
+    EDITTEXT        IDC_COMMANDLINEARGS_EDIT,10,10,400,345,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,185,360,50,14
 END
 
 IDD_DOSAVEORNOTBOX DIALOGEX 0, 0, 312, 80
@@ -1510,18 +1478,3 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     PUSHBUTTON      "+",IDC_RESTORE_BUTTON,0,0,12,10
 END
-
-IDD_NETWORKPATHWARNINGBOX DIALOGEX 0, 0, 390, 150
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE
-CAPTION "Notepad++ session loading"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
-BEGIN
-    LTEXT           "",IDC_NETWORKPATHWARNINGTEXT,9,8,372,95,SS_EDITCONTROL
-    DEFPUSHBUTTON   "&Skip",IDCANCEL,9,112,170,14
-    PUSHBUTTON      "Always &load from this server",IDYES,9,130,170,14
-    PUSHBUTTON      "?",IDC_BUTTON_SERVERWHITELIST_NOTE,181,130,16,14,NOT WS_TABSTOP
-    PUSHBUTTON      "&Always skip network paths",IDNO,213,112,170,14
-    PUSHBUTTON      "Always load &network paths",IDRETRY,213,130,170,14
-END
-

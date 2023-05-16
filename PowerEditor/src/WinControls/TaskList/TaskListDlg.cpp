@@ -40,9 +40,9 @@ static LRESULT CALLBACK hookProc(int nCode, WPARAM wParam, LPARAM lParam)
 		&& (::GetFocus() == hWndServer
 			|| ::IsChild(hWndServer, ::GetFocus()) == TRUE);
 	if (shouldPostMsg && (wParam == WM_RBUTTONUP))
-	{
+    {
 		::PostMessage(hWndServer, WM_RBUTTONUP, 0, 0);
-	}
+    }
 	else if (shouldPostMsg && (wParam == WM_MOUSEWHEEL) && windowsVersion >= WV_WIN10)
 	{
 		auto* pMD = reinterpret_cast<MSLLHOOKSTRUCT*>(lParam);
@@ -186,7 +186,7 @@ intptr_t CALLBACK TaskListDlg::run_dlgProc(UINT Message, WPARAM wParam, LPARAM l
 			break;
 		}
 
-		case WM_COMMAND:
+		case WM_COMMAND : 
 		{
 			switch (wParam)
 			{

@@ -858,7 +858,7 @@ LRESULT CALLBACK ScintillaEditView::ScintillaProc(
 	return ::DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
-#define DEFAULT_FONT_NAME "Courier New"
+#define DEFAULT_FONT_NAME "Consolas"
 
 void ScintillaEditView::setSpecialStyle(const Style& styleToSet) const
 {
