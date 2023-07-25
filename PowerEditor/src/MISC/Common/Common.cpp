@@ -1299,6 +1299,27 @@ bool isAssoCommandExisting(LPCTSTR FullPathName)
 	return isAssoCmdExist;
 }
 
+std::wstring s2ws(const std::string& str)
+{
+    auto converted_buffer_size_in_characters =
+         MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), nullptr, 0);
+    std::wstring my_wstring(converted_buffer_size_in_characters, wchar_t{});
+    auto my_buffer = my_wstring.data();
+    MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), my_buffer, converted_buffer_size_in_characters);
+    return my_wstring;
+}
+
+std::string ws2s(const std::wstring& wstr)
+{
+    auto converted_buffer_size_in_characters =
+            WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), (int)wstr.size(), nullptr, 0, NULL, NULL);
+    std::string my_string(converted_buffer_size_in_characters, char{});
+    auto my_buffer = my_string.data();
+    WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), (int)wstr.size(), my_buffer, converted_buffer_size_in_characters,
+            NULL, NULL);
+    return my_string;
+}
+
 bool deleteFileOrFolder(const wstring& f2delete)
 {
 	auto len = f2delete.length();
