@@ -768,7 +768,7 @@ BOOL Notepad_plus::notify(SCNotification *notification)
 			int index = tabNotification->_tabOrigin;
 			BufferID bufferToClose = notifyDocTab->getBufferByIndex(index);
 			Buffer * buf = MainFileManager.getBufferByID(bufferToClose);
-			int iView = isFromPrimary ? MAIN_VIEW : SUB_VIEW;
+			int iView = isFromPrimary?MAIN_VIEW:SUB_VIEW;
 			if (buf->isDirty())
 			{
 				activateBuffer(bufferToClose, iView);
@@ -1018,12 +1018,11 @@ BOOL Notepad_plus::notify(SCNotification *notification)
 					// IMPORTANT: If any submenu entry is added/moved/removed, you have to change the value of tabCmSubMenuEntryPos[] in localization.cpp file
 					
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSE, L"Close"));
-					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_BUT_CURRENT, L"Close All BUT This", L"Close Multiple Tabs"));
+					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_BUT_CURRENT, L"Close &All BUT This", L"Close Multiple Tabs"));
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_BUT_PINNED, L"Close All BUT Pinned", L"Close Multiple Tabs"));
-					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_TOLEFT, L"Close All to the Left", L"Close Multiple Tabs"));
-					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_TORIGHT, L"Close All to the Right", L"Close Multiple Tabs"));
+					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_TOLEFT, L"Close All to the Left &q", L"Close Multiple Tabs"));
+					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_TORIGHT, L"Close All to the Right &t", L"Close Multiple Tabs"));
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_CLOSEALL_UNCHANGED, L"Close All Unchanged", L"Close Multiple Tabs"));
-					itemUnitArray.push_back(MenuItemUnit(IDM_PINTAB, L"Pin Tab"));
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_SAVE, L"Save"));
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_SAVEAS, L"Save As..."));
 					itemUnitArray.push_back(MenuItemUnit(IDM_FILE_OPEN_FOLDER, L"Open Containing Folder in Explorer", L"Open into"));
@@ -1073,7 +1072,7 @@ BOOL Notepad_plus::notify(SCNotification *notification)
 			bool isEnable = ((::GetMenuState(_mainMenuHandle, IDM_FILE_SAVE, MF_BYCOMMAND)&MF_DISABLED) == 0);
 			_tabPopupMenu.enableItem(IDM_FILE_SAVE, isEnable);
 
-			Buffer* buf = _pEditView->getCurrentBuffer();
+			Buffer * buf = _pEditView->getCurrentBuffer();
 			bool isUserReadOnly = buf->getUserReadOnly();
 			_tabPopupMenu.checkItem(IDM_EDIT_SETREADONLY, isUserReadOnly);
 

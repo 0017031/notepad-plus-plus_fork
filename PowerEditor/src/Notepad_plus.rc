@@ -443,24 +443,24 @@ BEGIN
     BEGIN
         MENUITEM "&New",                             IDM_FILE_NEW
         MENUITEM "&Open...",                         IDM_FILE_OPEN
-        POPUP "Open Containing &Folder"
+        POPUP "Open Containing Folder"
         BEGIN
             MENUITEM "Explorer",       IDM_FILE_OPEN_FOLDER
             MENUITEM "cmd",            IDM_FILE_OPEN_CMD
             MENUITEM SEPARATOR
             MENUITEM "Folder as Workspace", IDM_FILE_CONTAININGFOLDERASWORKSPACE
         END
-        MENUITEM "Open in &Default Viewer",          IDM_FILE_OPEN_DEFAULT_VIEWER
+        MENUITEM "Open in Default Viewer",          IDM_FILE_OPEN_DEFAULT_VIEWER
         MENUITEM "Open Folder as &Workspace...",     IDM_FILE_OPENFOLDERASWORKSPACE
-        MENUITEM "Re&load from Disk",                IDM_FILE_RELOAD
+        MENUITEM "Reload from &Disk",                IDM_FILE_RELOAD
         MENUITEM "&Save",                            IDM_FILE_SAVE
         MENUITEM "Save &As...",                      IDM_FILE_SAVEAS
         MENUITEM "Save a Cop&y As...",               IDM_FILE_SAVECOPYAS
-        MENUITEM "Sa&ve All",                        IDM_FILE_SAVEALL
-        MENUITEM "&Rename...",                       IDM_FILE_RENAME
+        MENUITEM "Sa&ve Al&l",                        IDM_FILE_SAVEALL
+        MENUITEM "Rena&me...",                       IDM_FILE_RENAME
         MENUITEM "&Close",                           IDM_FILE_CLOSE
-        MENUITEM "Clos&e All",                       IDM_FILE_CLOSEALL
-        POPUP "Close &Multiple Documents"
+        MENUITEM "Close All &Files",                       IDM_FILE_CLOSEALL
+        POPUP "Close Multiple Documents"
         BEGIN
             MENUITEM "Close All but Active Document",    IDM_FILE_CLOSEALL_BUT_CURRENT
             MENUITEM "Close All but Pinned Documents",   IDM_FILE_CLOSEALL_BUT_PINNED
@@ -487,9 +487,9 @@ BEGIN
         MENUITEM "Cu&t",                             IDM_EDIT_CUT
         MENUITEM "&Copy",                            IDM_EDIT_COPY
         MENUITEM "&Paste",                           IDM_EDIT_PASTE
-        MENUITEM "&Delete",                          IDM_EDIT_DELETE
-        MENUITEM "&Select All",                      IDM_EDIT_SELECTALL
-        MENUITEM "Begin/End &Select",                IDM_EDIT_BEGINENDSELECT
+        MENUITEM "Delete",                          IDM_EDIT_DELETE
+        MENUITEM "Select All",                      IDM_EDIT_SELECTALL
+        MENUITEM "&Begin/End Select",                IDM_EDIT_BEGINENDSELECT
         MENUITEM "Begin/End Select in Column Mode",  IDM_EDIT_BEGINENDSELECT_COLUMNMODE
         MENUITEM SEPARATOR
         POPUP "Insert"
@@ -498,12 +498,16 @@ BEGIN
                 MENUITEM "Date Time (long)",         IDM_EDIT_INSERT_DATETIME_LONG
                 MENUITEM "Date Time (customized)",   IDM_EDIT_INSERT_DATETIME_CUSTOMIZED
         END
+
+        MENUITEM SEPARATOR
+        MENUITEM "Copy &Full File path",    IDM_EDIT_FULLPATHTOCLIP
+        MENUITEM "Copy Filenam&e only",     IDM_EDIT_FILENAMETOCLIP
+        MENUITEM "Copy &Dir. Path",         IDM_EDIT_CURRENTDIRTOCLIP
+        MENUITEM SEPARATOR
+
+
         POPUP "Cop&y to Clipboard"
         BEGIN
-                MENUITEM "Copy Current Full File path",    IDM_EDIT_FULLPATHTOCLIP
-                MENUITEM "Copy Current Filename",          IDM_EDIT_FILENAMETOCLIP
-                MENUITEM "Copy Current Dir. Path",         IDM_EDIT_CURRENTDIRTOCLIP
-                MENUITEM SEPARATOR
                 MENUITEM "Copy All Filenames",             IDM_EDIT_COPY_ALL_NAMES
                 MENUITEM "Copy All File Paths",            IDM_EDIT_COPY_ALL_PATHS
         END
@@ -523,6 +527,13 @@ BEGIN
             MENUITEM "&iNVERT cASE",             IDM_EDIT_INVERTCASE
             MENUITEM "&ranDOm CasE",             IDM_EDIT_RANDOMCASE
         END
+
+        MENUITEM SEPARATOR
+        MENUITEM "Sort Lines Lexicographically Ascending &a",           IDM_EDIT_SORTLINES_LEXICOGRAPHIC_ASCENDING
+        MENUITEM "Sort Lines Lexicographically Descending &s",          IDM_EDIT_SORTLINES_LEXICOGRAPHIC_DESCENDING
+        MENUITEM "&Remove Consecutive Duplicate Lines",                 IDM_EDIT_REMOVE_CONSECUTIVE_DUP_LINES
+        MENUITEM SEPARATOR
+
         POPUP "&Line Operations"
         BEGIN
             MENUITEM "Duplicate Current Line",                           IDM_EDIT_DUP_LINE
@@ -570,13 +581,14 @@ BEGIN
             MENUITEM "Function Parameters Next Hint",     IDM_EDIT_FUNCCALLTIP_NEXT
             MENUITEM "Path Completion",             IDM_EDIT_AUTOCOMPLETE_PATH
         END
-        POPUP "&EOL Conversion"
+        POPUP "EO&L Conversion"
         BEGIN
             MENUITEM "Windows (CR LF)",             IDM_FORMAT_TODOS
             MENUITEM "Unix (LF)",                   IDM_FORMAT_TOUNIX
             MENUITEM "Macintosh (CR)",              IDM_FORMAT_TOMAC
         END
-        POPUP "&Blank Operations"
+            MENUITEM "&Trim Trailing Space",                IDM_EDIT_TRIMTRAILING
+        POPUP "Blan&k Operations"
         BEGIN
             MENUITEM "Trim Trailing Space",                IDM_EDIT_TRIMTRAILING
             MENUITEM "Trim Leading Space",                 IDM_EDIT_TRIMLINEHEAD
@@ -647,7 +659,7 @@ BEGIN
         MENUITEM "Search Results &Window",      IDM_FOCUS_ON_FOUND_RESULTS
         MENUITEM "Next Search Resul&t",         IDM_SEARCH_GOTONEXTFOUND
         MENUITEM "Previous Search Resul&t",     IDM_SEARCH_GOTOPREVFOUND
-        MENUITEM "&Go to...",                   IDM_SEARCH_GOTOLINE
+        MENUITEM "Go to...",                   IDM_SEARCH_GOTOLINE
         MENUITEM "Go to &Matching Brace",       IDM_SEARCH_GOTOMATCHINGBRACE
         MENUITEM "Select All In-betw&een {} [] or ()", IDM_SEARCH_SELECTMATCHINGBRACES
         MENUITEM "Mar&k...",                    IDM_SEARCH_MARK
@@ -732,6 +744,7 @@ BEGIN
 
     POPUP "&View"
     BEGIN
+	    MENUITEM "AS&CII Map",                 IDM_EDIT_CHAR_PANEL
         MENUITEM "Always on Top",              IDM_VIEW_ALWAYSONTOP
         MENUITEM "Toggle Full Screen Mode",    IDM_VIEW_FULLSCREENTOGGLE
         MENUITEM "Post-It",                    IDM_VIEW_POSTIT
@@ -980,7 +993,7 @@ BEGIN
         MENUITEM "Convert to UTF-16 LE BOM",   IDM_FORMAT_CONV2_UTF_16LE
     END
 
-    POPUP "&Language"
+    POPUP "Langua&ge"
     BEGIN
         MENUITEM "None (Normal Text)",      IDM_LANG_TEXT
         MENUITEM SEPARATOR
@@ -994,11 +1007,11 @@ BEGIN
         MENUITEM "BaanC",                   IDM_LANG_BAANC
         MENUITEM "Batch",                   IDM_LANG_BATCH
         MENUITEM "Blitzbasic",              IDM_LANG_BLITZBASIC
+        MENUITEM "C++",                     IDM_LANG_CPP
+        MENUITEM "CMake",                   IDM_LANG_CMAKE
         MENUITEM "C",                       IDM_LANG_C
         MENUITEM "C#",                      IDM_LANG_CS
-        MENUITEM "C++",                     IDM_LANG_CPP
         MENUITEM "Caml",                    IDM_LANG_CAML
-        MENUITEM "CMake",                   IDM_LANG_CMAKE
         MENUITEM "COBOL",                   IDM_LANG_COBOL
         MENUITEM "CSound",                  IDM_LANG_CSOUND
         MENUITEM "CoffeeScript",            IDM_LANG_COFFEESCRIPT
@@ -1040,6 +1053,7 @@ BEGIN
         MENUITEM "NSIS",                    IDM_LANG_NSIS
         MENUITEM "Objective-C",             IDM_LANG_OBJC
         MENUITEM "OScript",                 IDM_LANG_OSCRIPT
+        MENUITEM "Python",                  IDM_LANG_PYTHON
         MENUITEM "Pascal",                  IDM_LANG_PASCAL
         MENUITEM "Perl",                    IDM_LANG_PERL
         MENUITEM "PHP",                     IDM_LANG_PHP
@@ -1047,15 +1061,13 @@ BEGIN
         MENUITEM "PowerShell",              IDM_LANG_POWERSHELL
         MENUITEM "Properties",              IDM_LANG_PROPS
         MENUITEM "Purebasic",               IDM_LANG_PUREBASIC
-        MENUITEM "Python",                  IDM_LANG_PYTHON
+        MENUITEM "Rust",                    IDM_LANG_RUST
         MENUITEM "R",                       IDM_LANG_R
         MENUITEM "Raku",                    IDM_LANG_RAKU
         MENUITEM "REBOL",                   IDM_LANG_REBOL
         MENUITEM "Registry",                IDM_LANG_REGISTRY
         MENUITEM "Resource file",           IDM_LANG_RC
         MENUITEM "Ruby",                    IDM_LANG_RUBY
-        MENUITEM "Rust",                    IDM_LANG_RUST
-        MENUITEM "SAS",                     IDM_LANG_SAS
         MENUITEM "Shell",                   IDM_LANG_BASH
         MENUITEM "Scheme",                  IDM_LANG_SCHEME
         MENUITEM "Smalltalk",               IDM_LANG_SMALLTALK
@@ -1082,7 +1094,7 @@ BEGIN
         MENUITEM "User-Defined",            IDM_LANG_USER
     END
 
-    POPUP "&Language"
+    POPUP "Langua&ge"
     BEGIN
     MENUITEM "None (Normal Text)",        IDM_LANG_TEXT
     MENUITEM SEPARATOR
@@ -1237,7 +1249,7 @@ BEGIN
     MENUITEM SEPARATOR
     POPUP "User Defined Language"
     BEGIN
-        MENUITEM "Define your language...",   IDM_LANG_USER_DLG
+        MENUITEM "Define your language...&Q",   IDM_LANG_USER_DLG
         MENUITEM "Open User Defined Language folder...",        IDM_LANG_OPENUDLDIR
         MENUITEM "Notepad++ User Defined Languages Collection", IDM_LANG_UDLCOLLECTION_PROJECT_SITE
     END
@@ -1248,7 +1260,7 @@ BEGIN
     BEGIN
         MENUITEM "Preferences...",          IDM_SETTING_PREFERENCE
         MENUITEM "Style Configurator...",   IDM_LANGSTYLE_CONFIG_DLG
-        MENUITEM "Shortcut Mapper...",      IDM_SETTING_SHORTCUT_MAPPER
+        MENUITEM "Mapper of Shortcuts",      IDM_SETTING_SHORTCUT_MAPPER
         MENUITEM SEPARATOR
         POPUP "Import"
         BEGIN
@@ -1324,7 +1336,7 @@ BEGIN
         MENUITEM "Recent Window",               IDM_WINDOW_MRU_FIRST, GRAYED
     END
 
-    POPUP "&?"
+    POPUP "&bHelp"
     BEGIN
         MENUITEM "Command Line Arguments...",      IDM_CMDLINEARGUMENTS
         MENUITEM SEPARATOR
@@ -1415,8 +1427,8 @@ BEGIN
     DEFPUSHBUTTON   "&Yes",IDYES,10,60,50,14
     PUSHBUTTON      "&No",IDNO,63,60,50,14
     PUSHBUTTON      "&Cancel",IDCANCEL,116,60,60,14
-    PUSHBUTTON      "Yes to &all",IDRETRY,179,60,60,14
-    PUSHBUTTON      "N&o to all",IDIGNORE,242,60,60,14
+    PUSHBUTTON      "Yes to all &s",IDRETRY,179,60,60,14
+    PUSHBUTTON      "No to all &t",IDIGNORE,242,60,60,14
 END
 
 IDD_DOSAVEALLBOX DIALOGEX 0, 0, 260, 95
