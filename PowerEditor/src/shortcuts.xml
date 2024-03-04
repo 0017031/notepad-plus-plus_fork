@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <NotepadPlus>
-    <InternalCommands />
-
     <!--
     You can organize you Macro menu & Run menu by adding the attribute 'FolderName="My sub-menu name"' to any Macro or Command node.
     This will place the corresponding node within a "My sub-menu name" sub-menu in the appropriate menu. Please consider the following examples:
     -->
+    <InternalCommands>
+        <Shortcut id="43053" Ctrl="yes" Alt="no" Shift="yes" Key="66" />
+        <Shortcut id="41012" Ctrl="no" Alt="no" Shift="no" Key="0" />
+        <Shortcut id="42020" Ctrl="no" Alt="no" Shift="no" Key="0" />
+        <Shortcut id="42089" Ctrl="no" Alt="no" Shift="no" Key="0" />
+        <Shortcut id="44029" Ctrl="no" Alt="yes" Shift="no" Key="65" />
+        <Shortcut id="44030" Ctrl="no" Alt="yes" Shift="no" Key="37" />
+        <Shortcut id="44031" Ctrl="no" Alt="yes" Shift="no" Key="39" />
+        <Shortcut id="42013" Ctrl="no" Alt="no" Shift="no" Key="0" />
+    </InternalCommands>
     <Macros>
         <!--
         <Macro name="aa" Ctrl="no" Alt="no" Shift="no" Key="0">
@@ -33,6 +41,12 @@
             <Action type="2" message="0" wParam="42024" lParam="0" sParam="" />
             <Action type="2" message="0" wParam="41006" lParam="0" sParam="" />
         </Macro>
+        <Macro name="my_join_lines" Ctrl="yes" Alt="no" Shift="yes" Key="74">
+            <Action type="0" message="2451" wParam="0" lParam="0" sParam="" />
+            <Action type="0" message="2301" wParam="0" lParam="0" sParam="" />
+            <Action type="0" message="2454" wParam="0" lParam="0" sParam="" />
+            <Action type="0" message="2180" wParam="0" lParam="0" sParam="" />
+        </Macro>
     </Macros>
     <UserDefinedCommands>
         <!--
@@ -44,6 +58,14 @@
         <Command name="Wikipedia Search" Ctrl="no" Alt="yes" Shift="no" Key="114">https://en.wikipedia.org/wiki/Special:Search?search=$(CURRENT_WORD)</Command>
         <Command name="Open selected file path in new instance" Ctrl="no" Alt="yes" Shift="no" Key="117">$(NPP_FULL_FILE_PATH) $(CURRENT_WORD) -nosession -multiInst</Command>
     </UserDefinedCommands>
-    <PluginCommands />
-    <ScintillaKeys />
+    <PluginCommands>
+        <PluginCommand moduleName="NppExport.dll" internalID="4" Ctrl="yes" Alt="no" Shift="yes" Key="67" />
+        <PluginCommand moduleName="XMLTools.dll" internalID="10" Ctrl="no" Alt="no" Shift="no" Key="0" />
+        <PluginCommand moduleName="XMLTools.dll" internalID="16" Ctrl="no" Alt="yes" Shift="no" Key="119" />
+    </PluginCommands>
+    <ScintillaKeys>
+        <ScintKey ScintID="2338" menuCmdID="0" Ctrl="yes" Alt="no" Shift="no" Key="68" />
+        <ScintKey ScintID="2469" menuCmdID="0" Ctrl="no" Alt="no" Shift="no" Key="0" />
+        <ScintKey ScintID="2288" menuCmdID="0" Ctrl="no" Alt="no" Shift="no" Key="0" />
+    </ScintillaKeys>
 </NotepadPlus>
