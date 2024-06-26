@@ -1577,7 +1577,7 @@ intptr_t CALLBACK FindReplaceDlg::run_dlgProc(UINT message, WPARAM wParam, LPARA
 			const bool isMonospaced = NppParameters::getInstance().getNppGUI()._monospacedFontFindDlg;
 			if (isMonospaced)
 			{
-				hFont = createFont(L"Courier New", 8, false, _hSelf);
+				hFont = createFont(L"Consolas", 16, false, _hSelf);
 			}
 			else
 			{
@@ -1591,7 +1591,7 @@ intptr_t CALLBACK FindReplaceDlg::run_dlgProc(UINT message, WPARAM wParam, LPARA
 
 			LOGFONT lf{};
 			::GetObject(hFont, sizeof(lf), &lf);
-			lf.lfHeight = -(_dpiManager.scale(16) - 5);
+			//lf.lfHeight = -(_dpiManager.scale(16) - 5);
 			_hComboBoxFont = ::CreateFontIndirect(&lf);
 
 			for (const auto& hComboBox : { hFindCombo, hReplaceCombo, hFiltersCombo, hDirCombo })
