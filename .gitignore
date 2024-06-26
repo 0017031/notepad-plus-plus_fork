@@ -7,8 +7,8 @@
 *.sln.docstates
 
 #-- Build results
-[Dd]ebug/
-[Rr]elease/
+*[Dd]ebug*/
+*[Rr]elease*/
 x64/
 x86/
 #[Bb]in/
@@ -16,6 +16,7 @@ x86/
 *.pdb
 
 #-- Visual C++ cache files
+.idea/
 .vs/
 .vscode/
 ipch/
