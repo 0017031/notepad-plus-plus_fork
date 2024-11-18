@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 // don't use resource editor it will corrupt this file,
 // it will default to default ANSI code page (e.g. #pragma code_page(1252)),
 // this will ignore line with #pragma code_page(65001) below,
@@ -271,10 +270,6 @@ IDI_VIEW_FILEBROWSER_ICON_DM2      ICON      "icons/dark/toolbar/filled/fileBrow
 IDI_VIEW_MONITORING_ICON_DM2       ICON      "icons/dark/toolbar/filled/monitoring_off.ico"
 IDI_VIEW_MONITORING_DIS_ICON_DM2   ICON      "icons/dark/toolbar/filled/monitoring_dis.ico"
 
-
-
-
-
 IDI_SAVED_ICON                  ICON      "icons/standard/tabbar/saved.ico"
 IDI_SAVED_DM_ICON               ICON      "icons/dark/tabbar/empty.ico"
 IDI_SAVED_ALT_ICON              ICON      "icons/standard/tabbar/saved_alt.ico"
@@ -379,7 +374,6 @@ IDR_ASCIIPANEL_ICO_DM           ICON        "icons/dark/panels/tabbar/asciiPanel
 IDR_FIND_RESULT_ICO2            ICON        "icons/light/panels/tabbar/findResult.ico"
 IDR_FIND_RESULT_ICO_DM          ICON        "icons/dark/panels/tabbar/findResult.ico"
 
-
 IDI_PROJECT_WORKSPACE           ICON        "icons/standard/panels/treeview/project_work_space.ico"
 IDI_PROJECT_WORKSPACEDIRTY      ICON        "icons/standard/panels/treeview/project_work_space_dirty.ico"
 IDI_PROJECT_PROJECT             ICON        "icons/standard/panels/treeview/project_root.ico"
@@ -434,7 +428,6 @@ IDI_FUNCLIST_SORTBUTTON_DM         ICON     "icons/dark/panels/toolbar/funclstSo
 IDI_FUNCLIST_RELOADBUTTON_DM       ICON     "icons/dark/panels/toolbar/funclstReload.ico"
 IDI_FUNCLIST_PREFERENCEBUTTON_DM   ICON     "icons/dark/panels/toolbar/funclstPreferences.ico"
 
-
 IDI_GET_INFO_FROM_TOOLTIP       ICON        "icons/moreOnTooltip.ico"
 
 IDR_M30_MENU MENU
@@ -481,12 +474,12 @@ BEGIN
 
     POPUP "&Edit"
     BEGIN
-        MENUITEM "&Undo",                            IDM_EDIT_UNDO
-        MENUITEM "&Redo",                            IDM_EDIT_REDO
+        MENUITEM "Undo",                            IDM_EDIT_UNDO
+        MENUITEM "Redo",                            IDM_EDIT_REDO
         MENUITEM SEPARATOR
-        MENUITEM "Cu&t",                             IDM_EDIT_CUT
-        MENUITEM "&Copy",                            IDM_EDIT_COPY
-        MENUITEM "&Paste",                           IDM_EDIT_PASTE
+        MENUITEM "Cut",                             IDM_EDIT_CUT
+        MENUITEM "Copy",                            IDM_EDIT_COPY
+        MENUITEM "Paste",                           IDM_EDIT_PASTE
         MENUITEM "Delete",                          IDM_EDIT_DELETE
         MENUITEM "Select All",                      IDM_EDIT_SELECTALL
         MENUITEM "&Begin/End Select",                IDM_EDIT_BEGINENDSELECT
@@ -504,7 +497,6 @@ BEGIN
         MENUITEM "Copy Filenam&e only",     IDM_EDIT_FILENAMETOCLIP
         MENUITEM "Copy &Dir. Path",         IDM_EDIT_CURRENTDIRTOCLIP
         MENUITEM SEPARATOR
-
 
         POPUP "Cop&y to Clipboard"
         BEGIN
@@ -529,6 +521,7 @@ BEGIN
         END
 
         MENUITEM SEPARATOR
+		MENUITEM "&Trim Trailing Space",                IDM_EDIT_TRIMTRAILING
         MENUITEM "Sort Lines Lexicographically Ascending &a",           IDM_EDIT_SORTLINES_LEXICOGRAPHIC_ASCENDING
         MENUITEM "Sort Lines Lexicographically Descending &s",          IDM_EDIT_SORTLINES_LEXICOGRAPHIC_DESCENDING
         MENUITEM "&Remove Consecutive Duplicate Lines",                 IDM_EDIT_REMOVE_CONSECUTIVE_DUP_LINES
@@ -572,7 +565,7 @@ BEGIN
             MENUITEM "Block Comment",          IDM_EDIT_STREAM_COMMENT
             MENUITEM "Block Uncomment",        IDM_EDIT_STREAM_UNCOMMENT
         END
-        POPUP "&Auto-Completion"
+        POPUP "_Auto-Completion"
         BEGIN
             MENUITEM "Function Completion",         IDM_EDIT_AUTOCOMPLETE
             MENUITEM "Word Completion",             IDM_EDIT_AUTOCOMPLETE_CURRENTFILE
@@ -587,7 +580,6 @@ BEGIN
             MENUITEM "Unix (LF)",                   IDM_FORMAT_TOUNIX
             MENUITEM "Macintosh (CR)",              IDM_FORMAT_TOMAC
         END
-            MENUITEM "&Trim Trailing Space",                IDM_EDIT_TRIMTRAILING
         POPUP "Blan&k Operations"
         BEGIN
             MENUITEM "Trim Trailing Space",                IDM_EDIT_TRIMTRAILING
@@ -640,7 +632,7 @@ BEGIN
         MENUITEM "Character &Panel",         IDM_EDIT_CHAR_PANEL
         MENUITEM "Clipboard &History",       IDM_EDIT_CLIPBOARDHISTORY_PANEL
         MENUITEM SEPARATOR
-        MENUITEM "&Set Read-Only",           IDM_EDIT_SETREADONLY
+        MENUITEM "Set Read-Only",           IDM_EDIT_SETREADONLY
         MENUITEM "Clear Read-Only Flag",     IDM_EDIT_CLEARREADONLY
     END
 
@@ -671,7 +663,7 @@ BEGIN
             MENUITEM "Clear Change History",        IDM_SEARCH_CLEAR_CHANGE_HISTORY
         END
         MENUITEM SEPARATOR
-        POPUP "Style &All Occurrences of Token"
+        POPUP "Style All Occurrences of Token"
         BEGIN
             MENUITEM "Using 1st Style",    IDM_SEARCH_MARKALLEXT1
             MENUITEM "Using 2nd Style",    IDM_SEARCH_MARKALLEXT2
@@ -1439,7 +1431,7 @@ FONT 8, L"MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "",IDC_DOSAVEALLTEXT,7,10,250,70,SS_EDITCONTROL
     DEFPUSHBUTTON   "&Yes",IDYES,47,75,50,14
-    PUSHBUTTON      "&Always yes",IDRETRY,100,75,60,14
+    PUSHBUTTON      "Always yes",IDRETRY,100,75,60,14
     PUSHBUTTON      "&No",IDNO,163,75,50,14
 END
 
