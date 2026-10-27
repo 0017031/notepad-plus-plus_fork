@@ -326,11 +326,14 @@ FindReplaceDlg::~FindReplaceDlg()
 	if (_hComboBoxFont)
 		::DeleteObject(_hComboBoxFont);
 
+	if (_hComboBoxLargeFont)
+		::DeleteObject(_hComboBoxLargeFont);
+
 	if (_hLargerBolderFont)
 		::DeleteObject(_hLargerBolderFont);
 
-	if (_hCourrierNewFont)
-		::DeleteObject(_hCourrierNewFont);
+	if (_hResizeGlyphFont)
+		::DeleteObject(_hResizeGlyphFont);
 
 	delete[] _uniFileName;
 }
@@ -1469,6 +1472,24 @@ void FindReplaceDlg::setMinHeightAndBordersMetrics() noexcept
 		+ _statusBar.getHeight());
 }
 
+namespace
+{
+	// Number of stacked input-field rows (Find / Replace with / Filters / Directory)
+	// that are displayed for a given Find-Replace dialog type.
+	int fieldRowCountForDialogType(DIALOG_TYPE dlgT) noexcept
+	{
+		switch (dlgT)
+		{
+			case FIND_DLG:            return 1;
+			case REPLACE_DLG:         return 2;
+			case FINDINFILES_DLG:     return 4;
+			case FINDINPROJECTS_DLG:  return 3; // Directory row is not displayed
+			case MARK_DLG:            return 1;
+		}
+		return 2;
+	}
+}
+
 void FindReplaceDlg::setMonospaceFont()
 {
 	if (_hComboBoxFont != nullptr)
@@ -1477,7 +1498,7 @@ void FindReplaceDlg::setMonospaceFont()
 		_hComboBoxFont = nullptr;
 	}
 
-	_hComboBoxFont = createFont(L"Courier New", 0, false, _hSelf);
+	_hComboBoxFont = createFont(L"Consolas", 0, false, _hSelf);
 	::SendMessage(::GetDlgItem(_hSelf, IDFINDWHAT), WM_SETFONT, reinterpret_cast<WPARAM>(_hComboBoxFont), MAKELPARAM(FALSE, 0));
 }
 
@@ -1511,6 +1532,31 @@ void FindReplaceDlg::setFont()
 		::SendMessage(::GetDlgItem(_hSelf, comboBoxId), WM_SETFONT, reinterpret_cast<WPARAM>(_hComboBoxFont), MAKELPARAM(TRUE, 0));
 	}
 
+	// Enlarged font used by all four input fields, twice the height of the shared combo-box font.
+	if (_hComboBoxLargeFont != nullptr)
+	{
+		::DeleteObject(_hComboBoxLargeFont);
+		_hComboBoxLargeFont = nullptr;
+	}
+
+	auto hFindCombo = ::GetDlgItem(_hSelf, IDFINDWHAT);
+	RECT rcCombo{};
+	getMappedChildRect(hFindCombo, rcCombo);
+	const int baseComboHeight = rcCombo.bottom - rcCombo.top;
+
+	lf.lfHeight *= 2;
+	_hComboBoxLargeFont = ::CreateFontIndirectW(&lf);
+
+	for (const auto comboBoxId : { IDFINDWHAT, IDREPLACEWITH, IDD_FINDINFILES_FILTERS_COMBO, IDD_FINDINFILES_DIR_COMBO })
+	{
+		::SendMessage(::GetDlgItem(_hSelf, comboBoxId), WM_SETFONT, reinterpret_cast<WPARAM>(_hComboBoxLargeFont), MAKELPARAM(TRUE, 0));
+	}
+
+	getMappedChildRect(hFindCombo, rcCombo);
+	_comboRowGrowth = (rcCombo.bottom - rcCombo.top) - baseComboHeight;
+
+	applyLargeFontVerticalLayout(fieldRowCountForDialogType(_currentStatus));
+
 	if (_hLargerBolderFont != nullptr)
 	{
 		::DeleteObject(_hLargerBolderFont);
@@ -1518,18 +1564,99 @@ void FindReplaceDlg::setFont()
 	}
 
 	// "⇅" enlargement
-	_hLargerBolderFont = createFont(L"Courier New", fontSizeBase + 5, true, _hSelf);
+	_hLargerBolderFont = createFont(L"Consolas", fontSizeBase + 5, true, _hSelf);
 	::SendMessage(_hSwapButton, WM_SETFONT, reinterpret_cast<WPARAM>(_hLargerBolderFont), MAKELPARAM(TRUE, 0));
 
-	if (_hCourrierNewFont != nullptr)
+	if (_hResizeGlyphFont != nullptr)
 	{
-		::DeleteObject(_hCourrierNewFont);
-		_hCourrierNewFont = nullptr;
+		::DeleteObject(_hResizeGlyphFont);
+		_hResizeGlyphFont = nullptr;
 	}
 
 	// Make "˄" & "˅" look better
-	_hCourrierNewFont = createFont(L"Courier New", fontSizeBase + 3, false, _hSelf);
-	::SendMessage(::GetDlgItem(_hSelf, IDD_RESIZE_TOGGLE_BUTTON), WM_SETFONT, reinterpret_cast<WPARAM>(_hCourrierNewFont), MAKELPARAM(TRUE, 0));
+	_hResizeGlyphFont = createFont(L"Consolas", fontSizeBase + 3, false, _hSelf);
+	::SendMessage(::GetDlgItem(_hSelf, IDD_RESIZE_TOGGLE_BUTTON), WM_SETFONT, reinterpret_cast<WPARAM>(_hResizeGlyphFont), MAKELPARAM(TRUE, 0));
+}
+
+void FindReplaceDlg::applyLargeFontVerticalLayout(int nbFieldRows)
+{
+	if ((_hSelf == nullptr) || (_comboRowGrowth <= 0) || (nbFieldRows < 1))
+		return;
+
+	static constexpr std::array<int, 2> row1Ctrls{ IDFINDWHAT, IDFINDWHAT_STATIC };
+	static constexpr std::array<int, 3> row2Ctrls{ IDREPLACEWITH, ID_STATICTEXT_REPLACE, IDD_FINDREPLACE_SWAP_BUTTON };
+	static constexpr std::array<int, 3> row3Ctrls{ IDD_FINDINFILES_FILTERS_COMBO, IDD_FINDINFILES_FILTERS_STATIC, IDC_FIF_FILTER_TIP_STATIC };
+	static constexpr std::array<int, 4> row4Ctrls{ IDD_FINDINFILES_DIR_COMBO, IDD_FINDINFILES_DIR_STATIC, IDD_FINDINFILES_BROWSE_BUTTON, IDD_FINDINFILES_SETDIRFROMDOC_BUTTON };
+
+	static constexpr std::array<int, 23> contentCtrls{
+		IDC_MARKLINE_CHECK, IDC_PURGE_CHECK, IDC_BACKWARDDIRECTION, IDWHOLEWORD, IDMATCHCASE, IDWRAP,
+		IDC_MODE_STATIC, IDNORMAL, IDEXTENDED, IDREGEXP, IDREDOTMATCHNL, IDC_IN_SELECTION_CHECK,
+		IDD_FINDINFILES_RECURSIVE_CHECK, IDD_FINDINFILES_INHIDDENDIR_CHECK,
+		IDD_FINDINFILES_PROJECT1_CHECK, IDD_FINDINFILES_PROJECT2_CHECK, IDD_FINDINFILES_PROJECT3_CHECK,
+		IDC_TRANSPARENT_CHECK, IDC_TRANSPARENT_GRPBOX, IDC_TRANSPARENT_LOSSFOCUS_RADIO,
+		IDC_TRANSPARENT_ALWAYS_RADIO, IDC_PERCENTAGE_SLIDER, IDD_RESIZE_TOGGLE_BUTTON
+	};
+
+	static constexpr UINT flags = SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOACTIVATE | SWP_NOCOPYBITS;
+
+	// Capture the 1x baseline top position of every shifted control once.
+	if (_ctrlBaseTopY.empty())
+	{
+		RECT rc{};
+		const auto captureBase = [this, &rc](const auto& ctrls)
+		{
+			for (const int id : ctrls)
+			{
+				getMappedChildRect(id, rc);
+				_ctrlBaseTopY[id] = rc.top;
+			}
+		};
+		captureBase(row1Ctrls);
+		captureBase(row2Ctrls);
+		captureBase(row3Ctrls);
+		captureBase(row4Ctrls);
+		captureBase(contentCtrls);
+	}
+
+	const auto moveToBaseY = [this](int id, LONG y)
+	{
+		HWND h = ::GetDlgItem(_hSelf, id);
+		if (h == nullptr)
+			return;
+		RECT rc{};
+		getMappedChildRect(h, rc);
+		::SetWindowPos(h, nullptr, rc.left, y, 0, 0, flags);
+	};
+
+	const auto moveRow = [this, &moveToBaseY](const auto& ctrls, int rowIndex)
+	{
+		const LONG shift = static_cast<LONG>(rowIndex - 1) * _comboRowGrowth;
+		for (const int id : ctrls)
+			moveToBaseY(id, _ctrlBaseTopY[id] + shift);
+	};
+
+	moveRow(row1Ctrls, 1);
+	moveRow(row2Ctrls, 2);
+	moveRow(row3Ctrls, 3);
+	moveRow(row4Ctrls, 4);
+
+	// Tab-page content moves below all input-field rows that are shown for the current tab.
+	const LONG contentShift = static_cast<LONG>(nbFieldRows) * _comboRowGrowth;
+	for (const int id : contentCtrls)
+		moveToBaseY(id, _ctrlBaseTopY[id] + contentShift);
+
+	setMinHeightAndBordersMetrics();
+
+	// Grow the dialog window if the enlarged layout no longer fits in the current client area.
+	RECT rcClient{};
+	getClientRect(rcClient);
+	if (rcClient.bottom < _szMinDialog.cy)
+	{
+		RECT rcWnd{};
+		::GetWindowRect(_hSelf, &rcWnd);
+		const LONG newHeight = (rcWnd.bottom - rcWnd.top) + (_szMinDialog.cy - rcClient.bottom);
+		::SetWindowPos(_hSelf, nullptr, 0, 0, rcWnd.right - rcWnd.left, newHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+	}
 }
 
 std::mutex findOps_mutex;
@@ -5360,6 +5487,10 @@ void FindReplaceDlg::hideOrShowCtrl4reduceOrNormalMode(DIALOG_TYPE dlgT)
 
 void FindReplaceDlg::calcAndSetCtrlsPos(DIALOG_TYPE dlgT, bool fromColBtn)
 {
+	// Keep the enlarged input-field rows and the tab-page content below them aligned
+	// with the number of field rows that the current tab displays.
+	applyLargeFontVerticalLayout(fieldRowCountForDialogType(dlgT));
+
 	const bool isNotLessMode = !NppParameters::getInstance().getNppGUI()._findWindowLessMode;
 
 	RECT rcBtn1stPos{};

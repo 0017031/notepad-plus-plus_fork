@@ -350,7 +350,7 @@ void HashFromFilesDlg::destroyFont()
 void HashFromFilesDlg::setFont()
 {
 	destroyFont();
-	_hFont = createFont(L"Courier New", NppParameters::getInstance().getDlgFontSize() + 1, false, _hSelf);
+	_hFont = createFont(L"Consolas", NppParameters::getInstance().getDlgFontSize() + 1, false, _hSelf);
 
 	::SendMessage(::GetDlgItem(_hSelf, IDC_HASH_PATH_EDIT), WM_SETFONT, reinterpret_cast<WPARAM>(_hFont), MAKELPARAM(TRUE, 0));
 	::SendMessage(::GetDlgItem(_hSelf, IDC_HASH_RESULT_EDIT), WM_SETFONT, reinterpret_cast<WPARAM>(_hFont), MAKELPARAM(TRUE, 0));
@@ -712,7 +712,7 @@ void HashFromTextDlg::destroyFont()
 void HashFromTextDlg::setFont()
 {
 	destroyFont();
-	_hFont = createFont(L"Courier New", NppParameters::getInstance().getDlgFontSize() + 1, false, _hSelf);
+	_hFont = createFont(L"Consolas", NppParameters::getInstance().getDlgFontSize() + 1, false, _hSelf);
 
 	::SendMessage(::GetDlgItem(_hSelf, IDC_HASH_TEXT_EDIT), WM_SETFONT, reinterpret_cast<WPARAM>(_hFont), MAKELPARAM(TRUE, 0));
 	::SendMessage(::GetDlgItem(_hSelf, IDC_HASH_RESULT_FOMTEXT_EDIT), WM_SETFONT, reinterpret_cast<WPARAM>(_hFont), MAKELPARAM(TRUE, 0));

@@ -467,6 +467,7 @@ protected :
 
 	void setMonospaceFont();
 	void setFont();
+	void applyLargeFontVerticalLayout(int nbFieldRows);
 
 	intptr_t CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam) override;
 
@@ -515,8 +516,14 @@ private:
 	int _statusbarTooltipIconSize = 0;
 
 	HFONT _hComboBoxFont = nullptr;
+	HFONT _hComboBoxLargeFont = nullptr;
 	HFONT _hLargerBolderFont = nullptr;
-	HFONT _hCourrierNewFont = nullptr;
+	HFONT _hResizeGlyphFont = nullptr;
+
+	// Vertical growth (in pixels) of one combo-box row caused by the enlarged combo-box font.
+	int _comboRowGrowth = 0;
+	// Baseline top Y (at 1x layout) of every control that the enlarged font shifts vertically.
+	std::map<int, LONG> _ctrlBaseTopY;
 
 	std::map<int, bool> _controlEnableMap;
 
